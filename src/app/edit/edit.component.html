@@ -1,0 +1,100 @@
+<html>
+<head>
+
+</head>
+<body>
+  <!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark cyan" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" routerLink='/profile'>DATAGRID</a></mdb-navbar-brand>
+
+  <ul class="navbar-nav ml">
+    <li class="nav-item">
+      <a class="nav-link waves-light" mdbWavesEffect routerLink='/upload'><mdb-icon fas icon="upload"></mdb-icon> Upload</a>
+          </li>
+    <li class="nav-item">
+      <a class="nav-link waves-light" mdbWavesEffect routerLink='/update'><mdb-icon fas icon="user-edit"></mdb-icon> Edit</a>
+    </li>
+  </ul>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="envelope"></mdb-icon> Contact<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="cog"></mdb-icon> Settings</a>
+      </li>
+
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="user"></mdb-icon> Profile<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink='/profile'>My account</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink='/logout'>Log out</a>
+        </div>
+      </li>
+
+    </ul>
+    <!-- Links -->
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+
+  
+  <div class="row ">
+    <div class="col-md-6 mx-auto my-5">
+      <section class="form-elegant">
+        <mdb-card>
+          <mdb-card-body class="mx-4">
+            <!--Header-->
+            <div class="text-center ">
+              <h3 class="dark-grey-text mb-5">
+                <strong>Edit Profile</strong>
+              </h3>
+            </div>
+  
+            <form [formGroup]="editForm">
+              <div class="md-form">
+                
+                <input type="text" id="elegantFormEmailEx" class="form-control" formControlName="first_name" mdbInput>
+                <label for="elegantFormEmailEx">First Name</label>
+              </div>
+  
+              <div class="md-form pb-3">
+                
+                <input type="password" id="elegantFormPasswordEx" formControlName="last_name" class="form-control" mdbInput>
+                <label for="elegantFormPasswordEx">Last Name</label>
+             </div>
+            </form>
+            <!--Body-->
+  
+            <div class="text-center mb-3">
+              <button type="button" mdbBtn gradient="blue" style="border-radius: 16px;"
+              block="true" rounded="true" class="z-depth-1a waves-light btn btn-info" mdbWavesEffect (click)="update()">Confirm Update</button>
+            </div>
+          </mdb-card-body>
+          
+        </mdb-card>
+        <div *ngIf="msg===true"> 
+            <Span class="text-success"><h4>Details Edited Successfully</h4></Span>
+        </div>
+        <div *ngIf="msg===false"> 
+            <Span class="text-danger"><h4>Error While Updation details Try Again..</h4></Span>
+        </div>
+
+      </section>
+    </div>
+  </div>
+
+</body>
+
+</html>
+

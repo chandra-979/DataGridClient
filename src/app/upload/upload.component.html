@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark cyan" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" routerLink='/profile'>DATAGRID</a></mdb-navbar-brand>
+
+  <ul class="navbar-nav ml">
+    <li class="nav-item">
+      <a class="nav-link waves-light" mdbWavesEffect routerLink='/upload'><mdb-icon fas icon="upload"></mdb-icon> Upload</a>
+          </li>
+    <li class="nav-item">
+      <a class="nav-link waves-light" mdbWavesEffect routerLink='/update'><mdb-icon fas icon="user-edit"></mdb-icon> Edit</a>
+    </li>
+  </ul>
+
+
+
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="envelope"></mdb-icon> Contact<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="cog"></mdb-icon> Settings</a>
+      </li>
+
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <mdb-icon far icon="user-circle"></mdb-icon> Profile<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink='/profile'>My account</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink='/logout'>Log out</a>
+        </div>
+      </li>
+
+    </ul>
+    <!-- Links -->
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+
+
+<div style="text-align:center; margin-top: 100px; " class="pb"><mat-card style="margin-top:10px; width: 50%;">  
+  <mat-card-content>  
+      <ul>  
+          <li *ngFor="let file of files">  
+            <tr>
+              <td>{{file.data.name}}:</td>
+              <td>
+              <div class="progress border">
+                <div class="progress-bar progress-bar-success progress-bar-striped border" role="progressbar"
+                (aria-valuenow)='file.progress' aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                  {{file.progress}}% Complete 
+                </div>
+              </div>
+            </td>
+          </tr>
+          </li>  
+      </ul> 
+      
+  </mat-card-content>  
+  <mat-card-actions >  
+    
+    <div class="table col-*-* " >
+      <table >
+        <tr>
+      <td><div class="col-*-*"><button class="btn btn-info btn-md" style="border-radius: 16px;" (click)="onClick()"><mdb-icon fas icon="upload"></mdb-icon>Upload</button></div></td>  
+      <td><div class="col-*-*"><button class="btn btn-info btn-md" style="border-radius: 16px;"(click)="reload()"> Profile</button></div></td>
+    </tr>
+      </table>
+    </div>
+    
+  </mat-card-actions>  
+</mat-card><input type="file" #fileUpload id="fileUpload" name="fileUpload" multiple="multiple" accept="*" style="display:none;" />
+</div>
+
+
+</body>
+</html>
+
+
+  

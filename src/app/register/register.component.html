@@ -1,40 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark cyan" [containerInside]="false">
 
-<div class="card m-3" >
-    <h1 class="card-header">User Registration</h1>
-    <div class="card-body">
-        <form (ngSubmit)="register()">
-            <div class="form-row"> 
-                <div class="form-group col-5">
-                    <label>First Name</label>
-                    <input type="text"  class="form-control" [(ngModel)]="credentials.first_name" [ngModelOptions]="{standalone:true}" />    
-                </div>
-                <div class="form-group col-5">
-                    <label>Last Name</label>
-                    <input type="text" class="form-control" [(ngModel)]="credentials.last_name" [ngModelOptions]="{standalone:true}"/>
-                    
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="text" class="form-control" [(ngModel)]="credentials.email" [ngModelOptions]="{standalone:true}"/>
-                
-            </div>
-            <div class="form-row">
-                <div class="form-group col">
-                    <label>Password</label>
-                    <input type="password" class="form-control" [(ngModel)]="credentials.password" [ngModelOptions]="{standalone:true}"/>
-                    
-                </div>
-                
-            </div>
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" routerLink='/login'>DATAGRID</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink='/login'><mdb-icon fas icon="sign-in-alt"></mdb-icon> Login<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink='/register'><mdb-icon fas icon="user-alt"></mdb-icon> SignUp</a>
+      </li>
+      
+      <!-- Dropdown -->
+      
+    </ul>
+    <!-- Links -->
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+
+
+  <div class="row ">
+    <div class="col-md-6 mx-auto my-5">
+      <section class="form-elegant">
+        <mdb-card>
+          <mdb-card-body class="mx-4">
+            <!--Header-->
             <div class="text-center">
-                <button class="btn btn-primary mr-1">Register</button>
-                <button class="btn btn-secondary" type="reset">Cancel</button>
+              <h3 class="dark-grey-text mb-5">
+                <strong>Sign Up</strong>
+              </h3>
             </div>
-
-            <div class="container" *ngIf="failure">
-                <span class="text-danger">user all ready exist</span>
+  
+            <form [formGroup]="registerForm">
+              <div class="md-form">
+                
+                <input type="text" id="elegantFormfn" class="form-control" formControlName="first_name" mdbInput>
+                <label for="elegantFormfn">First Name</label>
               </div>
-        </form>
+              <div class="md-form">
+                
+                <input type="text" id="elegantFormln" class="form-control" formControlName="last_name" mdbInput>
+                <label for="elegantFormln">Last Name</label>
+              </div>
+              <div class="md-form">
+                
+                <input type="text" id="elegantFormEmailEx" class="form-control" formControlName="email" mdbInput>
+                <label for="elegantFormEmailEx">Email</label>
+              </div>
+              
+              <div class="md-form pb-3">
+                
+                <input type="password" id="elegantFormPasswordEx" formControlName="password" class="form-control" mdbInput>
+                <label for="elegantFormPasswordEx">Password</label>
+              </div>
+            </form>
+            <!--Body-->
+  
+            <div class="text-center mb-3">
+              <button type="button" mdbBtn gradient="blue" style="border-radius: 16px;"
+               block="true" rounded="true" class="z-depth-1a waves-light btn btn-info" mdbWavesEffect (click)="register()">Sign Up</button>
+            </div>
+          </mdb-card-body>
+          
+        </mdb-card>
+
+        <div class="container" *ngIf="waitingFlag===false">
+            <span class="text-info"><h2>Plaease Wait...</h2></span>
+        </div>
+
+        <div class="container" *ngIf="failure">
+            <span class="text-danger"><h3>User all ready exist</h3></span>
+        </div>
+  
+      </section>
     </div>
-</div>
+  </div>
+
+
+</body>
+</html>
+
+

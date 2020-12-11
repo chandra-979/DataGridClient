@@ -1,64 +1,521 @@
  <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Arima+Madurai:100,200,300,400,500,700,800,900" rel="stylesheet">
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script>
+    $("audio").on("play", function() {
+    $("audio").not(this).each(function(index, audio) {
+        this.audio.pause();
+    });
+});
+
+  </script>
 </head>
-<body>
-<div class="container">
-    <div class="jumbotron mt-5">
-      <div class="col-sm-8 mx-auto">
-        <h1 class="text-center">PROFILE</h1>
-      </div>
-      <table class="table col-md-6 mx-auto">
-        <tr>
-          <td>Fist Name</td>
-          <td>{{ details?.first_name }}</td>
-        </tr>
-        <tr>
-          <td>Last Name</td>
-          <td>{{ details?.last_name }}</td>
-        </tr>
-        <tr>
-          <td>Email</td>
-          <td>{{ details?.email }}</td>
-        </tr>
-      </table>
+<body >
+
+  <!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark  cyan" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand " routerLink='/profile'>DATAGRID</a></mdb-navbar-brand>
+
+  <ul class="navbar-nav ml">
+    <li class="nav-item">
+      <a class="nav-link waves-light" mdbWavesEffect routerLink='/upload'><mdb-icon fas icon="upload"></mdb-icon> Upload</a>
+          </li>
+    <li class="nav-item">
+      <a class="nav-link waves-light" mdbWavesEffect routerLink='/update'><mdb-icon fas icon="user-edit"></mdb-icon> Edit</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link waves-light" mdbWavesEffect (click)="showBin()"><mdb-icon fas icon="user-edit"></mdb-icon> Trash</a>
+    </li>
+  </ul>
+
+
+
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="envelope"></mdb-icon> Contact</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect><mdb-icon fas icon="cog"></mdb-icon> Settings</a>
+      </li>
+
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" >
+          <mdb-icon far icon="user-circle"></mdb-icon> Profile<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink='/profile'>My account</a>
+          <a class="dropdown-item waves-light" (click)="hideprofile()">Profile</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink='/logout'>Log out</a>
+        </div>
+      </li>
+
+    </ul>
+    <!-- Links -->
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+
+ <div id="profile"
+ style="background-image: url(https://images.unsplash.com/photo-1536405416754-3bcd4fb38128?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60);"
+ > 
+<div class="border">
+        <h1 class="text-center text-white ">PROFILE</h1>    
+</div>
+  <table class="table   border center">
+  <thead>
+    <tr>
+      <th  style="color: white;"><h3>FirstName</h3></th>
+      <th  style="color: white;"><h3>LastName</h3></th>
+      <th style="color: white;"><h3>Email</h3></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td  >
+        <h4 style="color: white;"><i>{{details.first_name}}</i></h4>
+      </td>
+      <td >
+        <h4 style="color: white;"><i>{{details.last_name}}</i></h4>
+      </td >
+      <td>
+        <h4 style="color: white;"><i>{{details.email}}</i></h4>
+      </td>
+      
+    </tr>
+  </tbody>
+  </table>
+</div>
+
+
+<div class="card-group " style="transition: transform .2s">
+<!-- Card -->
+<div class="card mb-4 card-image"
+  style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRjirRKbHDyjxmLYPYNnaL5YY6ZU6y2NQu06w&usqp=CAU);">
+
+  <!-- Content -->
+
+  <style>
+
+.zoom:hover {
+    transform: scaleY(1.3); /* (130% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+  </style>
+  <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4 zoom">
+    <div>
+      <h5 class="pink-text"><i class="fas fa-chart-pie"></i> Images
+        <span class="badge badge-pill badge-info">{{imglen}}</span>
+      </h5>
+      
+      <a class="btn btn-pink" (click)="imagesDisplay()"><i class="fas fa-clone left"></i> Images</a>
     </div>
   </div>
-<div style="text-align:center; margin-top: 100px; "><mat-card style="margin-top:10px; width: 50%;">  
-     <!-- <mat-card-content>  
-        <ul>  
-            <li *ngFor="let file of files">  
-                <mat-progress-bar [value]="file.progress">
-                  <img id="myimage" [src]='thumbnail' />
-                </mat-progress-bar>  
-                <span id="file-label">  
-                      
-                </span>  
-            </li>  
-        </ul>  
-    </mat-card-content>  -->
-    <ul>  
-      <li *ngFor="let file of thumbnail">  
-            <img id="myimage" [src]='file' /> 
-      </li>  
-    </ul>   
-    
-    <mat-card-actions>  
-        <button mat-button color="warn" (click)="onClick()">  
-            <mat-icon>file_upload</mat-icon>  
-            Upload  
-        </button>  
-    </mat-card-actions>  
-</mat-card><input type="file" #fileUpload id="fileUpload" name="fileUpload" multiple="multiple" accept="*" style="display:none;" />
+
 </div>
-<button type="submit" class="btn btn-lg btn-primary btn-block" (click)="getMyImage()">Files</button>
-  <button type="submit" class="btn btn-lg btn-primary btn-block" (click)="logout()">Signout</button>
+<!-- Card -->
+
+<!-- Card -->
+<div class="card mb-4 card-image zoom"
+  style="background-image: url(https://cdn.pixabay.com/photo/2017/11/24/10/43/analogue-2974647__340.jpg);">
+
+  <!-- Content -->
+  <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+    <div>
+      <h5 class="pink-text text-center"><i class="fas fa-chart-pie"></i> Videos
+        <span class="badge badge-pill badge-info">{{videolen}}</span>
+      </h5>
+      
+      <a class="btn btn-pink" (click)="videosDisplay()"><i class="fas fa-clone left"></i> Videos</a>
+    </div>
+  </div>
+
+</div>
+<!-- Card -->
+
+
+<!-- Card -->
+<div class="card mb-4 card-image zoom"
+  style="background-image: url(https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);">
+
+  <!-- Content -->
+  <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4 " >
+    <div>
+      <h5 class="pink-text"><i class="fas fa-chart-pie"></i> Music
+        <span class="badge badge-pill badge-info">{{audiolen}}</span>
+      </h5>
+      
+      <a class="btn btn-pink" (click)="audioDisplay()"><i class="fas fa-clone left"></i> Music</a>
+    </div>
+  </div>
+
+</div>
+<!-- Card -->
+
+<!-- Card -->
+<div class="card mb-4 card-image zoom"
+  style="background-image: url(https://png.pngtree.com/thumb_back/fh260/background/20190221/ourmid/pngtree-education-black-background-simple-style-psd-source-file-image_12827.jpg);">
+
+  <!-- Content -->
+  <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+    <div>
+      <h5 class="pink-text"><i class="fas fa-chart-pie"></i> Documents
+        <span class="badge badge-pill badge-info">{{doclen}}</span>
+      </h5>
+      
+      <a class="btn btn-pink" (click)="docsDisplay()"><i class="fas fa-clone left"></i> Documents</a>
+    </div>
+  </div>
+
+</div>
+<!-- Card -->
+
+<!-- Card -->
+<div class="card mb-4 card-image zoom"
+  style="background-image: url(https://png.pngtree.com/thumb_back/fh260/back_pic/00/16/25/835756d36fbef6d.jpg);">
+
+  <!-- Content -->
+  <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+    <div>
+      <h5 class="pink-text"><i class="fas fa-chart-pie"></i> All
+        <span class="badge badge-pill badge-info">{{allLen}}</span>
+      </h5>
+      
+      <a class="btn btn-pink" (click)="allDisplay()"><i class="fas fa-clone left"></i> All</a>
+    </div>
+  </div>
+
+</div>
+<!-- Card -->
+
+</div>
+<div id="trash" *ngIf="trashFlag">
+  <table class="table border " *ngFor="let f of bin;let i=index">
+    <div >
+      <tr>
+        <td>
+          {{i+1}}
+        </td>
+        <td><h4 >{{f.filename}}</h4></td>
+        <td>
+          <button class=" btn text-white btn-lg" 
+              mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+              (click)="deleteFile(f.id,f.OriginalName)">Parmanent Delete
+            </button>
+        </td>
+        <td>
+          <button class=" btn text-white btn-lg" 
+              mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+              (click)="restoreFile(f.filename)">Restore
+            </button>
+        </td>
+
+      </tr>
+    </div>
+
+  </table>
+<tr>
+  <td>
+    <button class=" btn text-white btn-lg" 
+              mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+              (click)="back()">Back
+            </button>
+  </td>
+</tr>
+</div>
+
   
+
+<div *ngIf="allFlag" class="fluid-container">
+<!-- images -->
+<div class="row border" >
+  <div class="container" *ngIf="imglen===0 && imageFlag">
+    <span class="text-info"><h3><br><br>No Images Found</h3></span>
+  </div>
+  <div class="col-md-12" >
+    <div id="mdb-lightbox-ui"></div>
+    <div class="mdb-lightbox no-margin border" *ngFor="let img of images">
+      <figure class="col-md-2 col-lg-2 col-sm-4" >
+        <div class="view rippler-img rippler-bs-primary">
+          <a target="_blank" href="javascript:window.location=this.getElementsById('img')[0].src;">
+          <img id="img" [src]="img.filedata" style="height: 200px;width: 200px;" class="img-fluid img-thumbnail" alt="placeholder">
+        </a>
+          <div class=" " data-target="#imageview">
+          </div>
+        </div>
+        
+          <h5 class="text-bold text-white" >{{img.OriginalName}}</h5>
+          <tr>
+   
+            <p> <button class=" btn text-white btn-lg" style="border-radius: 16px;"
+              mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+              (click)="deleteFile(img.id,img.OriginalName)">Delete
+            </button></p>
+          <td><button class=" btn text-white " style="border-radius: 16px;"
+            mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+            (click)="downloadPDF(img.filename,img.contentType)"><a routerLink="http://localhost:4000/download" download>
+            </a>Download</button></td>
+          </tr>
+       </figure>
+    </div>
+  </div>
+</div>
+<script>
+// MDB Lightbox Init
+$(function () {
+$("#mdb-lightbox-ui").load("dashboard.component.html");
+});
+</script>
+  <!--videos  -->
+  <div class="row border" >
+    <div class="container" *ngIf="videolen===0 && videoFlag">
+      <span class="text-info"><h3><br><br>No Videos Found</h3></span>
+    </div>
+    <div class="col-md-12">
+      <div id="mdb-lightbox-ui"></div>
+      <div class="mdb-lightbox no-margin border" *ngFor="let img of videoes" >
+        <div class="col-md-2"
+        style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRWbdqKHa1X_sBsLImiWhsmO_F8TnqrEPIzwA&usqp=CAU');
+    background-repeat: no-repeat;"        >
+          <video class="video-fluid z-depth-1"  controls muted style="height: 200px;width: 200px;" >
+            <source [src]="img.filedata" type="video/mp4" />
+          </video>
+          <h5 class="text-white">{{img.OriginalName}}</h5>
+            <button class="btn text-white" style="border-radius: 16px;"
+              mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+              (click)="removeFile(img.id,img.OriginalName,img.contentType)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+// MDB Lightbox Init
+$(function () {
+$("#mdb-lightbox-ui").load("dashboard.component.html");
+});
+</script>
+  <!-- audioes -->
+  <div class="row border" >
+    <div class="container" *ngIf="audiolen===0 && audioFlag">
+      <span class="text-info"><h3><br><br>No Audioes Found</h3></span>
+    </div>
+    <div class="col-md-12 border">
+      <div id="mdb-lightbox-ui"></div>
+      <div class="mdb-lightbox no-margin border" *ngFor="let img of audioes;let i=index"
+      
+      >
+        <div class="col-md-2" 
+        style="background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');
+    background-repeat: no-repeat;"
+        >
+          <audio class="video-fluid z-depth-1"  controls muted style="height: 200px;width: 200px;">
+            <source [src]="img.filedata" type="audio/mp3" />
+          </audio>
+          <h5 class="text-white">{{img.OriginalName}}</h5>
+            <button class="btn text-white" style="border-radius: 16px;"
+              mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+              (click)="deleteFile(img.id,img.OriginalName)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+// MDB Lightbox Init
+$(function () {
+$("#mdb-lightbox-ui").load("dashboard.component.html");
+});
+</script>
+
+<div class="container" >
+  <table class="table  border">
+      <thead>
+        <tr>
+          <th><h2 class="text-white">Name</h2> </th>
+          <th><h2 class="text-white">Link</h2></th>
+          
+          <th><h2 class="text-white">Delete</h2></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let file of docs">
+          <td><h4 class="text-white">{{ file.OriginalName }}</h4></td>
+          <td><button class="btn-md text-white" 
+            mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+            (click)="downloadPDF(file.filename,file.contentType)"><a href="localhost:4200/download" download></a>Download</button></td>
+          <td> <p> <button class="btn-md text-white" 
+            mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+            (click)="deleteFile(file.id,file.OriginalName)">Delete</button></p></td>
+        </tr>  
+        
+        <tr *ngFor="let file of remains">
+          <td><h4 class="text-white">{{ file.OriginalName }}</h4></td>
+          <td><button class=" btn text-white" 
+            mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+            (click)="downloadPDF(file.filename,file.contentType)"><a href="localhost:4200/download" download></a>Download</button></td> 
+          <td> <p> <button class="btn text-white" style="border-radius: 16px;"
+            mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+            (click)="deleteFile(file.id,file.OriginalName)">Delete</button></p></td>
+        </tr> 
+    
+      </tbody>
+    </table>
+</div>
+
+</div>
+<!-- only images -->
+<div *ngIf="imageFlag">
+<div class="row border" >
+  <div class="container" *ngIf="imglen===0 && imageFlag">
+    <span class="text-info"><h3><br><br>No Images Found</h3></span>
+  </div>
+
+  <div class="col-md-12 border">
+
+    <div id="mdb-lightbox-ui"></div>
+
+    <div class="mdb-lightbox no-margin border" *ngFor="let img of images">
+
+      <figure class="col-md-3">
+        <div class="view">
+          <img [src]="img.filedata" style="height: 200px;width: 200px;" class="img-fluid img-thumbnail" alt="placeholder">
+          <div class="mask flex-center waves-effect waves-light ">
+          </div>
+        </div>
+          <h5 >{{img.OriginalName}}</h5>
+          <tr>
+          <p> <button  style="border-radius: 16px;"
+            mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+            (click)="deleteFile(img.id,img.OriginalName)">Delete
+          </button></p>
+          <td><button class="btn" style="border-radius: 16px;"
+            mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+            (click)="downloadPDF(img.filename,img.contentType)"><a href="localhost:4200/download" download></a>Download</button></td>
+          </tr>
+        </figure>
+    </div>
+  </div>
+</div>
+<script>
+// MDB Lightbox Init
+$(function () {
+$("#mdb-lightbox-ui").load("dashboard.component.html");
+});
+</script>
+</div>
+<!-- only videos -->
+<div *ngIf="videoFlag">
+  <div class="row border" >
+    <div class="container" *ngIf="videolen===0 && videoFlag">
+      <span class="text-info"><h3><br><br>No Videos Found</h3></span>
+    </div>
+    <div class="col-md-12">
+      <div id="mdb-lightbox-ui"></div>
+      <div class="mdb-lightbox no-margin border" *ngFor="let img of videoes">
+        <div class="col-md-2"
+        style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRWbdqKHa1X_sBsLImiWhsmO_F8TnqrEPIzwA&usqp=CAU');
+    background-repeat: no-repeat;"
+        >
+          <video class="video-fluid z-depth-1"  controls muted style="height: 200px;width: 200px;">
+            <source [src]="img.filedata" type="video/mp4" />
+          </video>
+          <h5 class="text-white">{{img.OriginalName}}</h5>
+            <button class="btn text-white" style="border-radius: 16px;"
+              mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+              (click)="deleteFile(img.id,img.OriginalName)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+// MDB Lightbox Init
+$(function () {
+$("#mdb-lightbox-ui").load("dashboard.component.html");
+});
+</script></div>
+<!-- only audioes -->
+<div *ngIf="audioFlag">
+<div class="row" >
+  <div class="container" *ngIf="audiolen===0 && audioFlag">
+    <span class="text-info"><h3><br><br>No Audioes Found</h3></span>
+  </div>
+  <div class="col-md-12">
+    <div id="mdb-lightbox-ui"></div>
+    <div class="mdb-lightbox no-margin" *ngFor="let img of audioes">
+    <div style="background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60');
+    background-repeat: no-repeat;">
+      <div class="col-md-2">
+        <audio class="video-fluid z-depth-1"  controls muted style="height: 200px;width: 200px;">
+          <source [src]="img.filedata" type="audio/mp3" />
+        </audio>
+        <h5 class="text-white">{{img.OriginalName}}</h5>
+          <button class="btn text-white" style="border-radius: 16px;"
+            mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+            (click)="deleteFile(img.id,img.OriginalName)">Delete</button>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+<script>
+// MDB Lightbox Init
+$(function () {
+$("#mdb-lightbox-ui").load("dashboard.component.html");
+});
+</script>
+</div>
+<div *ngIf="docFlag">
+  <div class="container border" *ngIf="doclen===0 && docFlag && remainLen===0">
+    <span class="text-info"><br><br><h3>No Documents Found</h3></span>
+  </div>
+  <div class="container border">
+    <table class="table  border">
+        <thead>
+          <tr>
+            <th class="text-white">File Name</th>
+            <th class="text-white">Link</th>
+            <th class="text-white">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let file of docs">
+            <td class="text-white">{{ file.OriginalName }}</td>
+            <td><button class="btn text-white" 
+              mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+              (click)="downloadPDF(file.filename,file.contentType)"><a href="localhost:4200/download" download></a>Download</button></td> 
+            <td> <p> <button class="btn text-white" 
+              mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+              (click)="deleteFile(file.id,file.OriginalName)">Delete</button></p></td>
+          </tr>  
+          <tr *ngFor="let file of remains">
+            <td class="text-white">{{ file.OriginalName }}</td>
+            <td><button class="btn text-white" style="border-radius: 16px;"
+              mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+              (click)="downloadPDF(file.filename,file.contentType)"><a href="localhost:4200/download" download></a>Download</button></td> 
+            <td> <p> <button class="btn text-white" style="border-radius: 16px;"
+              mdbBtn gradient="blue" block="true" rounded="true" class="z-depth-1a waves-light " mdbWavesEffect
+              (click)="deleteFile(file.id,file.OriginalName)">Delete</button></p></td>
+          </tr> 
+        </tbody>
+      </table>
+  </div>
+  
+
+</div>
+
 </body>
- 
+ </html>

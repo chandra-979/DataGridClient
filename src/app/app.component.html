@@ -7,21 +7,37 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
 </head>
-<body>
+<body >
+   <!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark cyan" [containerInside]="false" id="mainbar">
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand">DATAGRID</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li routerLink='/'><a >Home</a></li>
-      <li><a routerLink='/login'>Log In</a></li>
-      <li><a routerLink='/register'>Register</a></li>
-    </ul> 
-  </div>
-</nav>
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" routerLink='/login'>DATAGRID</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink='/login'><mdb-icon fas icon="sign-in-alt"></mdb-icon> Login<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink='/register'><mdb-icon fas icon="user-alt"></mdb-icon> SignUp</a>
+      </li>
+      
+      <!-- Dropdown -->
+      
+    </ul>
+    <!-- Links -->
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
 
 </body>
 <router-outlet></router-outlet>
+</html>
